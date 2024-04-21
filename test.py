@@ -1,7 +1,13 @@
-import ffmpeg_normalize as fn
+import subtitles as subs
+import ytdl as dl
+import glob
+import shutil
+import threading
 
-test = fn.FFmpegNormalize(audio_codec="aac")
+t = threading.Thread(target=dl.start_download, args=['https://www.youtube.com/watch?v=4TzVOLOROkM'])
+t.start()
+t.join()
 
-test.add_media_file("./Country Roads Video/CountryRoads.mp4", "test.mp4")
 
-test.run_normalization()
+output_file = glob.glob("ytdloutput.*")[0]
+ffmpeg_path = shutil.which("ffmpeg", path="./ffmpeg")
