@@ -1,13 +1,14 @@
 import subtitles as subs
 import ytdl as dl
-import glob
-import shutil
+import ffmpeg_encode as ff_e
 import threading
-
-t = threading.Thread(target=dl.start_download, args=['https://www.youtube.com/watch?v=4TzVOLOROkM'])
-t.start()
-t.join()
-
+import time
+import glob
 
 output_file = glob.glob("ytdloutput.*")[0]
-ffmpeg_path = shutil.which("ffmpeg", path="./ffmpeg")
+
+t = threading.Thread(target=ff_e.convert_to_mp4, args=[output_file, "out.mp4"])
+t.start()
+while (t.is_alive()):
+    print(ff_e.progress)
+    time.sleep(0.1)
