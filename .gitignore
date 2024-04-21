@@ -3,7 +3,5 @@ avge-aio/
 ffmpeg/
 videos/
 __pycache__/
-test.py
-test.py
 ytdloutput.webm
 /.vscode
